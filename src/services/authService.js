@@ -2,7 +2,7 @@ import axios from "axios";
 
 const api = "http://localhost:3000";
 
-export async function login({ username, password }) {
+export async function _login({ username, password }) {
   try {
     const res = await axios.post(`${api}/login`, { username, password });
     return Promise.resolve({ accessToken: res.data.accessToken });
