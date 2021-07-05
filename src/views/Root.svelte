@@ -10,51 +10,59 @@
       <input type="password" placeholder="password" bind:value={password}>
     </div>
     <div class="root__container__input">
-      <button>Login</button>
+      <button on:click={login}>Login</button>
     </div>
     
     <div class="root__container__register-link">
-      { authenticated }
+      { accessToken }
     </div>
   </div>
 </div>
 
 <script>
   import { authenticated } from "../stores/index"
+  import { _login } from '../services/authService'
 
   let username = '';
   let password = '';
+  let accessToken = '';
+  
 
-  function login() {
-    
+  async function login() {
+    try {
+      const res = await _login({ username, password })
+      accessToken = res.accessToken
+      console.log(accessToken)
+    } catch (error) {
+      accessToken = "WTF are you trying to do"
+    }
   }
 </script>
 
 
 <style>
-.root {
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-}
-.root__container {
-  max-width: 500px;
-  height: 600px;
-  background: #eee;
-  flex-direction: column;
-  padding: 10px;
-}
-.root__container__welcome {
-  text-decoration: underline;
-}
-.root__container__input {
-  padding: 10px 0;
-}
-.root__container__input input,
-.root__container__input button {
-  font-size: 1em;
-  padding: 5px 8px;
-  width: 100%;
-}
-
+  .root {
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+  }
+  .root__container {
+    max-width: 500px;
+    height: 600px;
+    background: #eee;
+    flex-direction: column;
+    padding: 10px;
+  }
+  .root__container__welcome {
+    text-decoration: underline;
+  }
+  .root__container__input {
+    padding: 10px 0;
+  }
+  .root__container__input input,
+  .root__container__input button {
+    font-size: 1em;
+    padding: 5px 8px;
+    width: 100%;
+  }
 </style>
