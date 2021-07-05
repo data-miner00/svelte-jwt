@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const api = process.env.EXPRESS_APP_URL;
+const api = __app.env.EXPRESS_APP_URL;
 
 export async function _login({ username, password }) {
   try {
