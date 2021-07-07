@@ -18,7 +18,7 @@
     </div>
     <ul class="header__right__dropdown" class:active={panelActive}>
       <li on:click={logout}>Logout</li>
-      <li on:click={navigate}>Something</li>
+      <li on:click={() => navigate()}>Something</li>
       <li on:click={() => navigate('secured')}>Secured</li>
       <li on:click={() => navigate('profile')}>Profile</li>
     </ul>
@@ -59,7 +59,7 @@
 
 .header__left {
   font-size: 2em;
-  font-weight: 600px;
+  font-weight: 800;
   color: #FF3E00;
 }
 
