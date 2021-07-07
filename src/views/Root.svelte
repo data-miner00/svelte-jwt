@@ -4,7 +4,7 @@
       <div class="root__container__welcome">
         <h1>Welcome to Svelte Login</h1>
       </div>
-      <form on:submit={login}>
+      <form on:submit|preventDefault={login}>
         <div class="root__container__input">
           <input type="text" placeholder="username" bind:value={username}>
         </div>
@@ -36,7 +36,7 @@
   let username = '';
   let password = '';
   let accessToken = '';
-  
+
   let authenticated = false;
 
   const unAuth = authState.subscribe(state => authenticated = state)
@@ -47,7 +47,7 @@
     try {
       const res = await _login({ username, password })
       accessToken = res.accessToken
-  
+
       authState.update(value => value = true)
       console.log(accessToken)
     } catch (error) {
