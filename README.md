@@ -46,4 +46,5 @@ There are 2 hardcoded users for this demo, namely **Kyle** and **Gim** where the
 - [ ] Refactor code
 - [ ] Enforce tighter security
 - [ ] Connect to DB
+- [ ] Implement Refresh Token
 - [ ] ...
