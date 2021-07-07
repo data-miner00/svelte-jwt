@@ -41,10 +41,10 @@
 {/if}
 
 <script>
-  import { authState, accessToken, userInfo } from "../stores/index"
-  import { _login } from '../services/authService'
-  import Home from "./Home.svelte"
-  import { onDestroy } from "svelte"
+  import { authState, accessToken, userInfo } from "../stores/index";
+  import { _login } from '../services/authService';
+  import Home from "./Home.svelte";
+  import { onDestroy } from "svelte";
 
   let username = '';
   let password = '';
@@ -52,23 +52,23 @@
   let authenticated = false;
   let errorMessage = null;
 
-  const unAuth = authState.subscribe(state => authenticated = state)
+  const unAuth = authState.subscribe(state => authenticated = state);
 
-  onDestroy(unAuth)
+  onDestroy(unAuth);
 
   async function login() {
 
-    if (!validateInput()) return
+    if (!validateInput()) return;
     
     try {
-      const res = await _login({ username, password })
-      accessToken.set(res.accessToken)
+      const res = await _login({ username, password });
+      accessToken.set(res.accessToken);
       userInfo.set({
         username: res.username,
-        id: res.id
+        id: res.id,
       });
 
-      authState.update(value => value = true)
+      authState.update(value => value = true);
     } catch (error) {
       switch(error) {
         case 403: 
@@ -85,21 +85,21 @@
 
   function validateInput() {
     if (username.length == 0 && password.length == 0) {
-      errorMessage = "Please insert your username and password!"
-      return false
+      errorMessage = "Please insert your username and password!";
+      return false;
     }
    
     if (username.length == 0) {
       errorMessage = "Username can't be left blank!";
-      return false
+      return false;
     }
 
     if (password.length == 0) {
-      errorMessage = "Please enter the password."
-      return false
+      errorMessage = "Please enter the password.";
+      return false;
     } 
 
-    return true
+    return true;
   }
 </script>
 
