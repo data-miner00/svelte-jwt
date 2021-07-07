@@ -24,18 +24,41 @@ const posts = [
   },
 ];
 
-users = [
+credentials = [
   {
+    id: 1,
     username: "Kyle",
     passwordHash:
       "6ca13d52ca70c883e0f0bb101e425a89e8624de51db2d2392593af6a84118090",
   },
   {
+    id: 2,
     username: "Gim",
     passwordHash:
       "6ca13d52ca70c883e0f0bb101e425a89e8624de51db2d2392593af6a84118090",
   },
 ];
+
+usersInfo = [
+  {
+    id: 1,
+    username: "Kyle",
+    phoneNumber: "+6012-234 5678",
+    email: "Kyle@gmail.com",
+    age: 43,
+  },
+  {
+    id: 2,
+    username: "Gim",
+    phoneNumber: "+6013-234 5678",
+    email: "Gim@gmail.com",
+    age: 44,
+  },
+];
+
+app.get("/profile/:id", authenticateToken, (req, res) => {
+  res.send(usersInfo.find((i) => i.id == req.params.id));
+});
 
 app.get("/posts", authenticateToken, (req, res) => {
   res.json(posts.filter((post) => post.username == req.user.name));
@@ -45,7 +68,7 @@ app.post("/login", (req, res) => {
   // Authenticate User
   const username = req.body.username;
   const password = req.body.password;
-  const user = users.find((n) => n.username == username);
+  const user = credentials.find((n) => n.username == username);
   if (!user) {
     return res.status(404).send("User not found");
   }
@@ -58,12 +81,13 @@ app.post("/login", (req, res) => {
   };
 
   const accessToken = jwt.sign(userobj, process.env.ACCESS_TOKEN_SECRET);
-  res.json({ accessToken });
+  res.json({ accessToken, id: user.id, username });
 });
 
 function authenticateToken(req, res, next) {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
+  console.log(token);
 
   if (!token) return res.status(401).send("No Token provided");
 
