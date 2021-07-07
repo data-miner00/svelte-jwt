@@ -1,6 +1,6 @@
 <header class="header">
   <div class="header__left">
-    <div>Svelte Login</div>
+    <div on:click={() => navigate('')}>Svelte Login</div>
   </div>
   <div class="header__right">
     <div class="header__right__user" class:active={panelActive} on:click={togglePanelState}>
@@ -61,6 +61,7 @@
   font-size: 2em;
   font-weight: 800;
   color: #FF3E00;
+  cursor: pointer;
 }
 
 .header__right {
