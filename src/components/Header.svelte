@@ -5,7 +5,7 @@
   <div class="header__right">
     <div class="header__right__user" class:active={panelActive} on:click={togglePanelState}>
       <div class="avatar">
-        <img src="http://localhost:5000/default_profile_bigger.png" alt="">
+        <img src="/default_profile_bigger.png" alt="">
       </div>
       <div class="username">
         <div>Gimmy</div>
