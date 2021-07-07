@@ -8,7 +8,18 @@ export async function _login({ username, password }) {
     const accessToken = res.data.accessToken;
 
     localStorage.setItem("accessToken", accessToken);
-    return Promise.resolve({ accessToken });
+
+    axios.interceptors.request.use(
+      (config) => {
+        config.headers.authorization = `Bearer ${accessToken}`;
+        return config;
+      },
+      (error) => {
+        return Promise.reject(error);
+      }
+    );
+
+    return Promise.resolve({ ...res.data });
   } catch (err) {
     return Promise.reject(err.response.status);
   }
