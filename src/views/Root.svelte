@@ -4,15 +4,17 @@
       <div class="root__container__welcome">
         <h1>Welcome to Svelte Login</h1>
       </div>
-      <div class="root__container__input">
-        <input type="text" placeholder="username" bind:value={username}>
-      </div>
-      <div class="root__container__input">
-        <input type="password" placeholder="password" bind:value={password}>
-      </div>
-      <div class="root__container__input">
-        <button on:click={login}>Login</button>
-      </div>
+      <form on:submit={login}>
+        <div class="root__container__input">
+          <input type="text" placeholder="username" bind:value={username}>
+        </div>
+        <div class="root__container__input">
+          <input type="password" placeholder="password" bind:value={password}>
+        </div>
+        <div class="root__container__input">
+          <button>Login</button>
+        </div>
+      </form>
       
       <div class="root__container__register-link">
         <span>Sign up for a new account</span>
