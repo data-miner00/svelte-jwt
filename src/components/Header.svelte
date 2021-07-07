@@ -3,7 +3,7 @@
     <div>Svelte Login</div>
   </div>
   <div class="header__right">
-    <div class="header__right__user">
+    <div class="header__right__user" class:active={panelActive} on:click={togglePanelState}>
       <div class="avatar">
         <img src="http://localhost:5000/default_profile_bigger.png" alt="">
       </div>
@@ -16,8 +16,8 @@
         </div>
       </div>
     </div>
-    <ul class="header__right__dropdown">
-      <li>Logout</li>
+    <ul class="header__right__dropdown" class:active={panelActive}>
+      <li on:click={logout}>Logout</li>
       <li>Something</li>
     </ul>
   </div>
@@ -26,6 +26,18 @@
 <script>
   import Icon from "svelte-awesome"
   import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+  import { onMount } from "svelte"
+  import { authState } from '../stores'
+
+  function logout() {
+    authState.update(state => state = false)
+  }
+
+  let panelActive = true;
+  function togglePanelState() {
+    panelActive = !panelActive
+  }
+  
 </script>
 
 <style>
@@ -57,6 +69,7 @@
   transition: background 0.2s;
 }
 
+.header__right__user.active,
 .header__right__user:hover {
   background-color: #eee;
 }
@@ -88,7 +101,7 @@
 }
 
 .header__right__dropdown {
-  display: block;
+  display: none;
   position: absolute;
   top: calc(100% + 5px);
   left: 0;
@@ -98,12 +111,21 @@
   box-shadow: 1px 1px 5px 2px #eee;
 }
 
+.header__right__dropdown.active {
+  display: block;
+}
+
 .header__right__dropdown li {
   list-style-type: none;
   width: 100%;
-  font-size: 18px;
+  /* font-size: 18px; */
   padding: 20px;
   background-color: aliceblue;
+  transition: background .2s;
+  cursor: pointer;
 }
 
+.header__right__dropdown li:hover {
+  background-color: azure;
+}
 </style>
