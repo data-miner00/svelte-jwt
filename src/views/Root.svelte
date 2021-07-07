@@ -58,7 +58,7 @@
 
   async function login() {
 
-    if (validateInput() == false) return
+    if (!validateInput()) return
     
     try {
       const res = await _login({ username, password })
