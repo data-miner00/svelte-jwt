@@ -4,7 +4,7 @@
     <div class="root__container">
       <div>
         <div class="root__container__logo">
-          <img src="/svelte.png" alt="">
+          <img src="/svelte.png" alt="svelte logo" width="80">
         </div>
         <div class="root__container__login-label">
           <h1>Sign In</h1>
@@ -41,7 +41,7 @@
 {/if}
 
 <script>
-  import { authState } from "../stores/index"
+  import { authState, accessToken } from "../stores/index"
   import { _login } from '../services/authService'
   import Home from "./Home.svelte"
   import { onDestroy } from "svelte"
@@ -62,7 +62,7 @@
     
     try {
       const res = await _login({ username, password })
-      accessToken = res.accessToken
+      accessToken.set(res.accessToken)
 
       authState.update(value => value = true)
     } catch (error) {
@@ -74,7 +74,7 @@
           errorMessage = "The user does not exist.";
           break;
         default:
-          errorMessage = "Unknown error occurred, please contact the devs!";
+          errorMessage = error;
       }
     }
   }
@@ -108,15 +108,14 @@
     display: flex;
   }
   .root__illustration {
-    flex: 1 1 0px;
+    flex: 3 1 0px;
     background-image: url("/landing2.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-
   }
   .root__container {
-    flex: 1 1 0px;
+    flex: 2 1 0px;
     background: white;
     /* box-shadow: 2px 2px 5px 2px gray; */
     display: flex;
@@ -162,7 +161,7 @@
     border: none;
     font-size: 1.3em;
     width: 100%;
-    /* padding: 8px 0; */
+    padding: 8px 0 0;
     outline: none;
     color: rgb(92, 87, 87);
   }
@@ -179,6 +178,11 @@
     font-size: 20px;
     font-weight: 700;
     color: white;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .root__container__login-btn button:hover {
+    background: #ff7a5c;
   }
   .root__container__error {
     font-weight: 700;
