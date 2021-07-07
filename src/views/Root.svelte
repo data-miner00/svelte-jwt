@@ -41,7 +41,7 @@
 {/if}
 
 <script>
-  import { authState, accessToken } from "../stores/index"
+  import { authState, accessToken, userInfo } from "../stores/index"
   import { _login } from '../services/authService'
   import Home from "./Home.svelte"
   import { onDestroy } from "svelte"
@@ -63,6 +63,10 @@
     try {
       const res = await _login({ username, password })
       accessToken.set(res.accessToken)
+      userInfo.set({
+        username: res.username,
+        id: res.id
+      });
 
       authState.update(value => value = true)
     } catch (error) {
