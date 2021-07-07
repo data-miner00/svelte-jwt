@@ -18,7 +18,7 @@
     </div>
     <ul class="header__right__dropdown" class:active={panelActive}>
       <li on:click={logout}>Logout</li>
-      <li>Something</li>
+      <li on:click={navigate}>Something</li>
     </ul>
   </div>
 </header>
@@ -28,6 +28,7 @@
   import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
   import { onMount } from "svelte"
   import { authState } from '../stores'
+  import { replace } from 'svelte-spa-router'
 
   function logout() {
     authState.update(state => state = false)
@@ -36,6 +37,10 @@
   let panelActive = true;
   function togglePanelState() {
     panelActive = !panelActive
+  }
+
+  function navigate() {
+    replace("#/smsj")
   }
   
 </script>
