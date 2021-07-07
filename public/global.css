@@ -6,10 +6,6 @@
   box-sizing: border-box;
 }
 
-div {
-  display: flex;
-}
-
 html,
 body {
   position: relative;
