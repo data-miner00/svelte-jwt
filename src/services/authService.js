@@ -10,7 +10,7 @@ export async function _login({ username, password }) {
     localStorage.setItem("accessToken", accessToken);
     return Promise.resolve({ accessToken });
   } catch (err) {
-    return Promise.reject(err);
+    return Promise.reject(err.response.status);
   }
 }
 
