@@ -19,6 +19,8 @@
     <ul class="header__right__dropdown" class:active={panelActive}>
       <li on:click={logout}>Logout</li>
       <li on:click={navigate}>Something</li>
+      <li on:click={() => navigate('secured')}>Secured</li>
+      <li on:click={() => navigate('profile')}>Profile</li>
     </ul>
   </div>
 </header>
@@ -39,8 +41,8 @@
     panelActive = !panelActive
   }
 
-  function navigate() {
-    replace("#/smsj")
+  function navigate(path = "non-existence-path") {
+    replace(`#/${path}`)
   }
   
 </script>
