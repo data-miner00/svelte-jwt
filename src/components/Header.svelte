@@ -42,7 +42,7 @@
     authState.update(state => state = false);
   }
 
-  let panelActive = true;
+  let panelActive = false;
   function togglePanelState() {
     panelActive = !panelActive;
   }
